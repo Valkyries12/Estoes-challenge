@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import EncabezadoTabla from "./EncabezadoTabla";
 
 const Agregar = () => {
     return (
         <>
-        <h2>Pantalla agregar</h2>
+        <EncabezadoTabla title={"My projects"}  hasButton={false} />
         <Link to="/">Volver a listado</Link>
         </>
     )
