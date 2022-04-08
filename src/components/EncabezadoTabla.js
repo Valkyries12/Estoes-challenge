@@ -11,15 +11,19 @@ const EncabezadoTabla = ({ title, hasButton }) => {
     backgroundColor: "#F5222D",
   };
 
+  const fondoColor = {
+    backgroundColor: "#fff",
+  };
+
   const handleAdd = () => {
     navigate("/agregar-tarea");
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={fondoColor}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography color="#262626" variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {title}
           </Typography>
           {hasButton && (
