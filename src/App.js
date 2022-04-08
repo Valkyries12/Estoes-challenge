@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import ListadoPantalla from "./components/ListadoPantalla";
-import Agregar from "./components/Agregar";
+import AgregarPantalla from "./components/AgregarPantalla";
 import Header from "./components/Header";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<ListadoPantalla />}/>
-        <Route path="/agregar-tarea" element={<Agregar />}/>
+        <Route path="/agregar-tarea" element={<AgregarPantalla />}/>
       </Routes>
     </div>
   );
