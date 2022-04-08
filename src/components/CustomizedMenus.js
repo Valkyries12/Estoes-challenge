@@ -23,7 +23,6 @@ const CustomizedMenus = ({ id }) => {
   };
   const handleEdit = (id) => {
     setAnchorEl(null);
-    console.log("edito ", id);
   };
 
   const handleDelete = (id) => {
@@ -42,8 +41,6 @@ const CustomizedMenus = ({ id }) => {
         Swal.fire("Deleted!", "Your project has been deleted.", "success");
       }
     });
-
-    console.log("borro ", id);
   };
 
   const handleClose = () => {
