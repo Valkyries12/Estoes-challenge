@@ -11,8 +11,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { addProject } from "../features/projectSlice";
-
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const btnStyle = {
   backgroundColor: "#F5222D",
@@ -26,16 +26,15 @@ const validationSchema = yup.object({
     .string("Enter a description")
     .min(10, "Description should be of minimum 8 characters length")
     .required("Description is required"),
-  projectManager: yup
-    .string()
-    .required("Project manager is required!"),
+  projectManager: yup.string().required("Project manager is required!"),
   assignedTo: yup.string().required("Assignation is required!"),
   status: yup.string().required("Status is required!"),
 });
 
 const AgregarForm = () => {
-    const { projects } = useSelector(state => state);
-    const dispatch = useDispatch();
+  const { projects } = useSelector((state) => state);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       projectName: "",
@@ -46,9 +45,31 @@ const AgregarForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      //   alert(JSON.stringify(values, null, 2));
       const cantidadProyectos = projects.projects.length;
-        dispatch(addProject({ id:  cantidadProyectos + 1, projectInfo: values.projectName, projectManager: values.projectManager, assignedTo: values.assignedTo, status: values.status}));
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You will add this project to the list!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, add it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(
+            addProject({
+              id: cantidadProyectos + 1,
+              projectInfo: values.projectName,
+              projectManager: values.projectManager,
+              assignedTo: values.assignedTo,
+              status: values.status,
+            })
+          );
+          Swal.fire("Added!", "Your project has been added.", "success");
+          navigate("/");
+        }
+      });
+      
       console.log(values);
     },
   });
@@ -135,7 +156,9 @@ const AgregarForm = () => {
               }
               helperText={formik.touched.assignedTo && formik.errors.assignedTo}
             >
-              <MenuItem value={"Teunisje Van den Corput"}>Teunisje Van den Corput</MenuItem>
+              <MenuItem value={"Teunisje Van den Corput"}>
+                Teunisje Van den Corput
+              </MenuItem>
               <MenuItem value={"Alex Harris"}>Alex Harris</MenuItem>
               <MenuItem value={"Nicolas Caruso"}>Nicolás Caruso</MenuItem>
             </Select>
