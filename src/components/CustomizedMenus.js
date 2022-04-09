@@ -7,6 +7,7 @@ import { FaTrash, FaRegEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { deleteProject, editProject } from "../features/projectSlice";
 import Swal from "sweetalert2";
+import { useNavigate  } from "react-router-dom";
 
 const ITEM_HEIGHT = 48;
 
@@ -18,11 +19,14 @@ const CustomizedMenus = ({ id }) => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleEdit = (id) => {
     setAnchorEl(null);
+    navigate(`/editar-proyecto/${id}`);
   };
 
   const handleDelete = (id) => {

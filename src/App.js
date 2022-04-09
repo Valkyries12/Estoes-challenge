@@ -9,7 +9,8 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<ListadoPantalla />}/>
-        <Route path="/agregar-tarea" element={<AgregarPantalla />}/>
+        <Route path="/agregar-proyecto" element={<AgregarPantalla />}/>
+        <Route path="/editar-proyecto/:id" element={<AgregarPantalla />}/>
       </Routes>
     </div>
   );

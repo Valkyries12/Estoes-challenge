@@ -10,9 +10,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useDispatch, useSelector } from "react-redux";
-import { addProject } from "../features/projectSlice";
+import { addProject, editProject } from "../features/projectSlice";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const btnStyle = {
   backgroundColor: "#F5222D",
@@ -35,14 +35,30 @@ const AgregarForm = () => {
   const { projects } = useSelector((state) => state);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const formik = useFormik({
-    initialValues: {
+  const { id } = useParams();
+  let initialValues;
+  if (id) {
+    const selectedProject = projects.projects.filter(
+      (item) => item.id === parseInt(id)
+    );
+    initialValues = {
+      projectName: selectedProject[0].projectName,
+      description: selectedProject[0].description,
+      projectManager: selectedProject[0].projectManager,
+      assignedTo: selectedProject[0].assignedTo,
+      status: selectedProject[0].status,
+    };
+  } else {
+    initialValues = {
       projectName: "",
       description: "",
       projectManager: "",
       assignedTo: "",
       status: "",
-    },
+    };
+  }
+  const formik = useFormik({
+    initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const cantidadProyectos = projects.projects.length;
@@ -56,21 +72,33 @@ const AgregarForm = () => {
         confirmButtonText: "Yes, add it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          dispatch(
-            addProject({
-              id: cantidadProyectos + 1,
-              projectInfo: values.projectName,
-              projectManager: values.projectManager,
-              assignedTo: values.assignedTo,
-              status: values.status,
-            })
-          );
+          if (id) {
+            dispatch(
+              editProject({
+                id: id,
+                projectName: values.projectName,
+                projectManager: values.projectManager,
+                assignedTo: values.assignedTo,
+                status: values.status,
+              })
+            );
+          } else {
+            dispatch(
+              addProject({
+                id: cantidadProyectos + 1,
+                projectName: values.projectName,
+                projectManager: values.projectManager,
+                assignedTo: values.assignedTo,
+                status: values.status,
+              })
+            );
+          }
+
           Swal.fire("Added!", "Your project has been added.", "success");
           navigate("/");
         }
       });
-      
-      console.log(values);
+
     },
   });
 
@@ -131,7 +159,7 @@ const AgregarForm = () => {
                 formik.touched.projectManager && formik.errors.projectManager
               }
             >
-              <MenuItem value={"Walt Cosani"}>Walt Cosani</MenuItem>
+              <MenuItem value={"Walt Cossani"}>Walt Cossani</MenuItem>
               <MenuItem value={"Yvonne Jennings"}>Yvonne Jennings</MenuItem>
               <MenuItem value={"Janco Haasjes"}>Janco Haasjes</MenuItem>
             </Select>
@@ -161,6 +189,7 @@ const AgregarForm = () => {
               </MenuItem>
               <MenuItem value={"Alex Harris"}>Alex Harris</MenuItem>
               <MenuItem value={"Nicolas Caruso"}>Nicolás Caruso</MenuItem>
+              <MenuItem value={"Ignacio Truffa"}>Ignacio Truffa</MenuItem>
             </Select>
           </FormControl>
 
@@ -187,7 +216,7 @@ const AgregarForm = () => {
           </FormControl>
 
           <Button style={btnStyle} variant="contained" type="submit">
-            Create Project
+            {id ? "Edit project" : "Create project"}
           </Button>
         </Box>
       </form>

@@ -31,7 +31,7 @@ const EncabezadoTabla = ({ title, hasAddButton, hasBackButton }) => {
   };
 
   const handleAdd = () => {
-    navigate("/agregar-tarea");
+    navigate("/agregar-proyecto");
   };
 
   const handleclick = () => {

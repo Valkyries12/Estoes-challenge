@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import CustomizedMenus from "./CustomizedMenus";
 
 const columns = [
-  { id: "projectInfo", label: "Project Info", minWidth: 170 },
+  { id: "projectName", label: "Project Name", minWidth: 170 },
   { id: "projectManager", label: "Project Manager", minWidth: 100 },
   {
     id: "assignedTo",
@@ -32,8 +32,8 @@ const columns = [
   },
 ];
 
-function createData(projectInfo, projectManager, assignedTo, status) {
-  return { projectInfo, projectManager, assignedTo, status };
+function createData(projectName, projectManager, assignedTo, status) {
+  return { projectName, projectManager, assignedTo, status };
 }
 
 // const rows = [
