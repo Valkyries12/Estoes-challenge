@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProject, editProject } from "../features/projectSlice";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const btnStyle = {
   backgroundColor: "#F5222D",
@@ -36,11 +37,13 @@ const AgregarForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
+  const matches = useMediaQuery("(min-width:700px)");
+
   let initialValues;
   if (id) {
-    const selectedProject = projects.projects ? projects.projects.filter(
-      (item) => item.id === parseInt(id) 
-    ) : projects.filter( (item) => item.id === parseInt(id));
+    const selectedProject = projects.projects
+      ? projects.projects.filter((item) => item.id === parseInt(id))
+      : projects.filter((item) => item.id === parseInt(id));
     initialValues = {
       projectName: selectedProject[0].projectName,
       description: selectedProject[0].description,
@@ -61,7 +64,9 @@ const AgregarForm = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      const cantidadProyectos = projects.projects ? projects.projects.length : projects.length;
+      const cantidadProyectos = projects.projects
+        ? projects.projects.length
+        : projects.length;
       Swal.fire({
         title: "Are you sure?",
         text: "You will add this project to the list!",
@@ -98,13 +103,26 @@ const AgregarForm = () => {
           navigate("/");
         }
       });
-
     },
   });
 
   return (
     <Paper
-      sx={{ width: "50%", overflow: "hidden", margin: "0 auto", padding: "4%" }}
+      sx={
+        matches
+          ? {
+              width: "50%",
+              overflow: "hidden",
+              margin: "0 auto",
+              padding: "4%",
+            }
+          : {
+              width: "90%",
+              overflow: "hidden",
+              margin: "0 auto",
+              padding: "8%",
+            }
+      }
     >
       <form onSubmit={formik.handleSubmit}>
         <Box

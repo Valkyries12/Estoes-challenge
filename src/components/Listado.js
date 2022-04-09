@@ -32,15 +32,6 @@ const columns = [
   },
 ];
 
-function createData(projectName, projectManager, assignedTo, status) {
-  return { projectName, projectManager, assignedTo, status };
-}
-
-// const rows = [
-//   createData("Landing page", "Walt Cossani", "Ignacio Truffa", "enabled"),
-//   createData("E-commerce shop", "Walt Cossani", "Ignacio Truffa", "enabled"),
-//   createData("CRM linkroom", "Walt Cossani", "Ignacio Truffa", "enabled"),
-// ];
 
 const Listado = ({ data }) => {
   const [page, setPage] = React.useState(0);
