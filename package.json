@@ -1,8 +1,7 @@
 {
   "name": "estoes-challenge",
   "version": "0.1.0",
-  "homepage": "https://valkyries12.github.io/estoes-challenge/",
-  "private": false,
+  "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -27,8 +26,6 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
