@@ -31,6 +31,7 @@ export const projectsSlice = createSlice({
         description: "lorem ipsum dolor sit amet",
         createdAt: "09/09/2020 10:30am"
       },
+      
     ],
   },
   reducers: {

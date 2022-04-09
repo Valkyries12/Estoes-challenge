@@ -80,27 +80,29 @@ const AgregarForm = () => {
         confirmButtonText: "Yes, add it!",
       }).then((result) => {
         if (result.isConfirmed) {
+          const format = "MM/DD/YYYY HH:mma";
+          let date = new Date();
           if (id) {
             dispatch(
               editProject({
                 id: parseInt(id),
                 projectName: values.projectName,
+                description: values.description,
                 projectManager: values.projectManager,
                 assignedTo: values.assignedTo,
                 status: values.status,
+                createdAt: moment(date).format(format)
               })
             );
           } else {
-            const format = "MM/DD/YYYY HH:mma";
-            let date = new Date();
             dispatch(
               addProject({
                 id: cantidadProyectos + 1,
                 projectName: values.projectName,
+                description: values.description,
                 projectManager: values.projectManager,
                 assignedTo: values.assignedTo,
                 status: values.status,
-                // createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
                 createdAt: moment(date).format(format)
               })
             );

@@ -17,7 +17,7 @@ const styles = {
     fontWeigth: "600",
   },
   typographyCreatedAt: {
-    fontSize: "11px",
+    fontSize: "10px",
     color: "#8C8C8C",
     textAlign: "start"
   },
