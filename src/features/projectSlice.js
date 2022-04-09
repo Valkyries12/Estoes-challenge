@@ -9,7 +9,7 @@ export const projectsSlice = createSlice({
         projectName: "Landing page",
         projectManager: "Walt Cossani",
         assignedTo: "Ignacio Truffa",
-        status: "enabled",
+        status: "Enabled",
         description: "lorem ipsum dolor sit amet",
         createdAt: "09/09/2020 10:30am"
       },
@@ -18,7 +18,7 @@ export const projectsSlice = createSlice({
         projectName: "E-commerce shop",
         projectManager: "Walt Cossani",
         assignedTo: "Ignacio Truffa",
-        status: "enabled",
+        status: "Enabled",
         description: "lorem ipsum dolor sit amet",
         createdAt: "09/09/2020 10:30am"
       },
@@ -27,7 +27,7 @@ export const projectsSlice = createSlice({
         projectName: "CRM linkroom",
         projectManager: "Walt Cossani",
         assignedTo: "Ignacio Truffa",
-        status: "enabled",
+        status: "Enabled",
         description: "lorem ipsum dolor sit amet",
         createdAt: "09/09/2020 10:30am"
       },

@@ -237,8 +237,8 @@ const AgregarForm = () => {
               error={formik.touched.status && Boolean(formik.errors.status)}
               helperText={formik.touched.status && formik.errors.status}
             >
-              <MenuItem value={"enabled"}>Enabled</MenuItem>
-              <MenuItem value={"disabled"}>Disabled</MenuItem>
+              <MenuItem value={"Enabled"}>Enabled</MenuItem>
+              <MenuItem value={"Disabled"}>Disabled</MenuItem>
             </Select>
           </FormControl>
 

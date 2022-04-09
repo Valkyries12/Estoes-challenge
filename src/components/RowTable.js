@@ -2,6 +2,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CustomizedMenus from "./CustomizedMenus";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Chip from "@mui/material/Chip";
 
 const styles = {
   typography: {
@@ -19,53 +20,60 @@ const styles = {
   typographyCreatedAt: {
     fontSize: "10px",
     color: "#8C8C8C",
-    textAlign: "start"
+    textAlign: "start",
   },
   tableRow: {
     padding: "12px 4px",
     borderBottom: "1px solid #D9D9D9",
-    alignItems: "center"
+    alignItems: "center",
   },
   menu: {
-      textAlign: "start"
-  }
+    textAlign: "start",
+  },
 };
 
 const RowTable = ({ dataRow }) => {
-    const matches = useMediaQuery("(min-width:700px)");
+  const matches = useMediaQuery("(min-width:700px)");
   return (
-      <Grid
-        container
-        style={styles.tableRow}
-        direction="row"
-        justifyContent="space-around"
-      >
-        <Grid item xs={matches ? 2 : 5}>
-          <Typography style={styles.typographyProjectName}>
-            {dataRow.projectName}
-          </Typography>
-          <Typography style={styles.typographyCreatedAt}>
-            {dataRow.createdAt && `Creation date: ${dataRow.createdAt}`}
-          </Typography>
-        </Grid>
-        <Grid item xs={2} sx={matches ? { display: "block" } : { display: "none" }}>
-          <Typography style={styles.typography}>
-            {dataRow.projectManager}
-          </Typography>
-        </Grid>
-        <Grid item xs={matches ? 2 : 4}>
-          <Typography style={styles.typography}>
-            {dataRow.assignedTo}
-          </Typography>
-        </Grid>
-        <Grid item xs={2} sx={matches ? { display: "block" } : { display: "none" }}>
-          <Typography style={styles.typography}>{dataRow.status} </Typography>
-        </Grid>
-        <Grid item xs={2} style={styles.menu}>
-              <CustomizedMenus key={dataRow.id}  id={dataRow.id} />
-        </Grid>
+    <Grid
+      container
+      style={styles.tableRow}
+      direction="row"
+      justifyContent="space-around"
+    >
+      <Grid item xs={matches ? 2 : 5}>
+        <Typography style={styles.typographyProjectName}>
+          {dataRow.projectName}
+        </Typography>
+        <Typography style={styles.typographyCreatedAt}>
+          {dataRow.createdAt && `Creation date: ${dataRow.createdAt}`}
+        </Typography>
       </Grid>
-   
+      <Grid
+        item
+        xs={2}
+        sx={matches ? { display: "block" } : { display: "none" }}
+      >
+        <Typography style={styles.typography}>
+          {dataRow.projectManager}
+        </Typography>
+      </Grid>
+      <Grid item xs={matches ? 2 : 4}>
+        <Typography style={styles.typography}>{dataRow.assignedTo}</Typography>
+      </Grid>
+      <Grid
+        item
+        xs={2}
+        sx={matches ? { display: "block" } : { display: "none" }}
+      >
+        <Typography style={styles.typography}>
+          <Chip sx={{backgroundColor: "#F5F5F5", borderColor: "#D9D9D9", borderRadius: "6px"}} label={dataRow.status} variant="outlined" />{" "}
+        </Typography>
+      </Grid>
+      <Grid item xs={2} style={styles.menu}>
+        <CustomizedMenus key={dataRow.id} id={dataRow.id} />
+      </Grid>
+    </Grid>
   );
 };
 
