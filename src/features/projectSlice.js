@@ -10,6 +10,8 @@ export const projectsSlice = createSlice({
         projectManager: "Walt Cossani",
         assignedTo: "Ignacio Truffa",
         status: "enabled",
+        description: "lorem ipsum dolor sit amet",
+        createdAt: "09/09/2020 10:30am"
       },
       {
         id: 2,
@@ -17,6 +19,8 @@ export const projectsSlice = createSlice({
         projectManager: "Walt Cossani",
         assignedTo: "Ignacio Truffa",
         status: "enabled",
+        description: "lorem ipsum dolor sit amet",
+        createdAt: "09/09/2020 10:30am"
       },
       {
         id: 3,
@@ -24,6 +28,8 @@ export const projectsSlice = createSlice({
         projectManager: "Walt Cossani",
         assignedTo: "Ignacio Truffa",
         status: "enabled",
+        description: "lorem ipsum dolor sit amet",
+        createdAt: "09/09/2020 10:30am"
       },
     ],
   },
@@ -62,11 +68,11 @@ export const projectsSlice = createSlice({
       const updatedProject = currentState.projects
         ? {
             ...action.payload,
-            projects: currentState.projects[indexProject].projectName,
+            projects: {...currentState.projects[indexProject]},
           }
         : {
             ...action.payload,
-            projects: currentState[indexProject].projectName,
+            projects: {...currentState[indexProject]},
           };
 
       const from = currentState.projects

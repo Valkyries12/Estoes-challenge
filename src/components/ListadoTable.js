@@ -2,11 +2,11 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import RowTable from "./RowTable";
-import "../index.css";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const styles = {
   typography: {
-    textAlign: "center",
+    textAlign: "start",
     fontSize: "16px",
     fontWeight: "bold",
   },
@@ -17,21 +17,27 @@ const styles = {
 };
 
 const ListadoTable = ({ data }) => {
+  const matches = useMediaQuery("(min-width:700px)");
   return (
     <Paper
-      sx={{
-        width: "90%",
-        overflow: "hidden",
-        margin: "0 auto",
-        border: "1px solid #D9D9D9",
-        borderRadius: "4px"
-      }}
+      sx={
+        matches
+          ? {
+              width: "85%",
+              overflow: "hidden",
+              margin: "0 auto",
+              border: "1px solid #D9D9D9",
+              borderRadius: "4px",
+            }
+          : { width: "100%" }
+      }
     >
       <Grid
         container
         style={styles.tableHead}
         direction="row"
-        justifyContent="space-between"
+        justifyContent="space-around"
+        sx={matches ? { display: "flex" } : { display: "none" }}
       >
         <Grid item xs={2}>
           <Typography style={styles.typography}>Project name</Typography>

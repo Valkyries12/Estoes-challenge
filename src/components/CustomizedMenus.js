@@ -60,6 +60,7 @@ const CustomizedMenus = ({ id }) => {
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
+        style={{color: "#000"}}
       >
         <MoreVertIcon />
       </IconButton>

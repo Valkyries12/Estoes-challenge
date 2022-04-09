@@ -14,6 +14,7 @@ import { addProject, editProject } from "../features/projectSlice";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import moment from "moment";
 
 const btnStyle = {
   backgroundColor: "#F5222D",
@@ -50,6 +51,7 @@ const AgregarForm = () => {
       projectManager: selectedProject[0].projectManager,
       assignedTo: selectedProject[0].assignedTo,
       status: selectedProject[0].status,
+      createdAt: selectedProject[0].createdAt
     };
   } else {
     initialValues = {
@@ -58,6 +60,7 @@ const AgregarForm = () => {
       projectManager: "",
       assignedTo: "",
       status: "",
+      createdAt: ""
     };
   }
   const formik = useFormik({
@@ -88,6 +91,8 @@ const AgregarForm = () => {
               })
             );
           } else {
+            const format = "MM/DD/YYYY HH:mma";
+            let date = new Date();
             dispatch(
               addProject({
                 id: cantidadProyectos + 1,
@@ -95,6 +100,8 @@ const AgregarForm = () => {
                 projectManager: values.projectManager,
                 assignedTo: values.assignedTo,
                 status: values.status,
+                // createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
+                createdAt: moment(date).format(format)
               })
             );
           }

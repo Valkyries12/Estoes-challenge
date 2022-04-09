@@ -1,5 +1,4 @@
 import EncabezadoTabla from "./EncabezadoTabla";
-import Listado from "./Listado";
 import ListadoTable from "./ListadoTable";
 import { useSelector } from 'react-redux';
 
@@ -16,7 +15,6 @@ const ListadoPantalla = () => {
   return (
     <div style={colorFondo}>
       <EncabezadoTabla title={"My projects"} hasBackButton={false} hasAddButton={true} />
-      {/* <Listado data={projectsData || []}/> */}
       <ListadoTable data={projectsData || []}/>
     </div>
   );

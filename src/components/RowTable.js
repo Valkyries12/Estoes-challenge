@@ -1,14 +1,25 @@
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CustomizedMenus from "./CustomizedMenus";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const styles = {
   typography: {
-    textAlign: "center",
+    textAlign: "start",
+    fontSize: "13px",
+    color: "#595959",
+    fontWeigth: "600",
+  },
+  typographyProjectName: {
+    textAlign: "start",
     fontSize: "15px",
     color: "#595959",
     fontWeigth: "600",
+  },
+  typographyCreatedAt: {
+    fontSize: "11px",
+    color: "#8C8C8C",
+    textAlign: "start"
   },
   tableRow: {
     padding: "12px 4px",
@@ -16,35 +27,38 @@ const styles = {
     alignItems: "center"
   },
   menu: {
-      textAlign: "center"
+      textAlign: "start"
   }
 };
 
 const RowTable = ({ dataRow }) => {
+    const matches = useMediaQuery("(min-width:700px)");
   return (
-    
       <Grid
         container
         style={styles.tableRow}
         direction="row"
-        justifyContent="space-between"
+        justifyContent="space-around"
       >
-        <Grid item xs={2}>
-          <Typography style={styles.typography}>
+        <Grid item xs={matches ? 2 : 5}>
+          <Typography style={styles.typographyProjectName}>
             {dataRow.projectName}
           </Typography>
+          <Typography style={styles.typographyCreatedAt}>
+            {dataRow.createdAt && `Creation date: ${dataRow.createdAt}`}
+          </Typography>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={matches ? { display: "block" } : { display: "none" }}>
           <Typography style={styles.typography}>
             {dataRow.projectManager}
           </Typography>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={matches ? 2 : 4}>
           <Typography style={styles.typography}>
             {dataRow.assignedTo}
           </Typography>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={matches ? { display: "block" } : { display: "none" }}>
           <Typography style={styles.typography}>{dataRow.status} </Typography>
         </Grid>
         <Grid item xs={2} style={styles.menu}>
