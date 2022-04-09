@@ -11,7 +11,7 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={fondoColor}>
         <Toolbar>       
-          <img src="images/logo.png" alt="Esto es logo"/>
+          <img src={process.env.PUBLIC_URL +  "/images/logo.png"} alt="Esto es logo"/>
         </Toolbar>
       </AppBar>
     </Box>
