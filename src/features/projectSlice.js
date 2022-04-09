@@ -48,9 +48,10 @@ export const projectsSlice = createSlice({
     },
     addProject: (state, action) => {
       const currentState = current(state);
+      const projects = state.projects ? state.projects : state;
       return {
         ...currentState,
-        projects: [...state.projects, action.payload],
+        projects: [...projects, action.payload],
       };
     },
     editProject: (state, action) => {
