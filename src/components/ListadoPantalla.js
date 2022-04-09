@@ -9,10 +9,12 @@ const ListadoPantalla = () => {
   const colorFondo = {
     backgroundColor: "#F0F2F5",
   };
+
+  const projectsData = projects.projects || projects;
   return (
     <div style={colorFondo}>
       <EncabezadoTabla title={"My projects"} hasBackButton={false} hasAddButton={true} />
-      <Listado data={projects.projects || []}/>
+      <Listado data={projectsData || []}/>
     </div>
   );
 };

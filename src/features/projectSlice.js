@@ -30,9 +30,9 @@ export const projectsSlice = createSlice({
   reducers: {
     deleteProject: (state, action) => {
       const currentState = current(state);
-      const filteredProject = currentState.projects.filter(
-        (item) => item.id !== action.payload
-      );
+      const filteredProject = currentState.projects
+        ? currentState.projects.filter((item) => item.id !== action.payload)
+        : currentState.filter((item) => item.id !== action.payload);
 
       return {
         ...currentState,
@@ -47,56 +47,35 @@ export const projectsSlice = createSlice({
       };
     },
     editProject: (state, action) => {
-      const currentState = current(state); 
-      const indexProject = currentState.projects.findIndex(item => item.id === parseInt(action.payload.id));
-      const updatedProject = {...action.payload, projects: currentState.projects[indexProject].projectName}
-      
-      return [
-        ...currentState.projects.slice(0, indexProject),
-        updatedProject,
-        ...currentState.projects.slice(indexProject + 1)
-      ]
+      const currentState = current(state);
+      const indexProject = currentState.projects
+        ? parseInt(
+            currentState.projects.findIndex(
+              (item) => item.id === parseInt(action.payload.id)
+            )
+          )
+        : parseInt(
+            currentState.findIndex(
+              (item) => item.id === parseInt(action.payload.id)
+            )
+          );
+      const updatedProject = currentState.projects
+        ? {
+            ...action.payload,
+            projects: currentState.projects[indexProject].projectName,
+          }
+        : {
+            ...action.payload,
+            projects: currentState[indexProject].projectName,
+          };
 
-      // debugger
-      // edited.id = action.payload.id;
-      // edited.projectName = action.payload.projectName;
-      // edited.description = action.payload.description;
-      // edited.projectManager = action.payload.projectManager;
-      // edited.assignedTo = action.payload.assignedTo;
-      // edited.status = action.payload.status;
-
-      // return {
-      //   ...currentState,
-      //   projects: [...currentState.projects, edited]
-      // };
-      
-      // currentState.projects.map((item) =>  {
-      //   debugger
-      //   if (item.id === parseInt(action.payload.id)) {
-      //     item.projectName = action.payload.projectName;
-      //     item.description = action.payload.description;
-      //     item.projectManager = action.payload.projectManager;
-      //     item.assignedTo = action.payload.assignedTo;
-      //     item.status = action.payload.status;
-      //   }
-      // })
-      // return {
-      //   // ...currentState,
-      //   projects: [...currentState.projects]
-      // }
-      // return currentState.projects.map((item) => {
-      //   if (item.id === parseInt(action.payload.id)) {
-      //     return {
-      //       ...item,
-      //       projectName: action.payload.projectName,
-      //       description: action.payload.description,
-      //       projectManager: action.payload.projectManager,
-      //       assignedTo: action.payload.assignedTo,
-      //       status: action.payload.status,
-      //     };
-      //   }
-      //   return item;
-      // });
+      const from = currentState.projects
+        ? currentState.projects.slice(0, indexProject)
+        : currentState.slice(0, indexProject);
+      const to = currentState.projects
+        ? currentState.projects.slice(indexProject + 1)
+        : currentState.slice(indexProject + 1);
+      return [...from, updatedProject, ...to];
     },
   },
 });

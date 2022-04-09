@@ -38,9 +38,9 @@ const AgregarForm = () => {
   const { id } = useParams();
   let initialValues;
   if (id) {
-    const selectedProject = projects.projects.filter(
-      (item) => item.id === parseInt(id)
-    );
+    const selectedProject = projects.projects ? projects.projects.filter(
+      (item) => item.id === parseInt(id) 
+    ) : projects.filter( (item) => item.id === parseInt(id));
     initialValues = {
       projectName: selectedProject[0].projectName,
       description: selectedProject[0].description,
@@ -61,7 +61,7 @@ const AgregarForm = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      const cantidadProyectos = projects.projects.length;
+      const cantidadProyectos = projects.projects ? projects.projects.length : projects.length;
       Swal.fire({
         title: "Are you sure?",
         text: "You will add this project to the list!",
@@ -75,7 +75,7 @@ const AgregarForm = () => {
           if (id) {
             dispatch(
               editProject({
-                id: id,
+                id: parseInt(id),
                 projectName: values.projectName,
                 projectManager: values.projectManager,
                 assignedTo: values.assignedTo,
