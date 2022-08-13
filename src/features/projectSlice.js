@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const projectsSlice = createSlice({
   name: "projects",
@@ -43,7 +43,7 @@ export const projectsSlice = createSlice({
     },
     editProject: (state, action) => {
       const id = action.payload.id;
-      state.projects[id] = action.payload;
+      state.projects[id -1] = action.payload;
     },
   },
 });
