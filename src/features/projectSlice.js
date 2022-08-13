@@ -35,55 +35,15 @@ export const projectsSlice = createSlice({
     ],
   },
   reducers: {
-    deleteProject: (state, action) => {
-      const currentState = current(state);
-      const filteredProject = currentState.projects
-        ? currentState.projects.filter((item) => item.id !== action.payload)
-        : currentState.filter((item) => item.id !== action.payload);
-
-      return {
-        ...currentState,
-        projects: filteredProject,
-      };
+    deleteProject (state, action) {
+       return state.projects.filter((item) => item.id !== action.payload);
     },
-    addProject: (state, action) => {
-      const currentState = current(state);
-      const projects = state.projects ? state.projects : state;
-      return {
-        ...currentState,
-        projects: [...projects, action.payload],
-      };
+    addProject (state, action) {
+      state.projects.push(action.payload);
     },
     editProject: (state, action) => {
-      const currentState = current(state);
-      const indexProject = currentState.projects
-        ? parseInt(
-            currentState.projects.findIndex(
-              (item) => item.id === parseInt(action.payload.id)
-            )
-          )
-        : parseInt(
-            currentState.findIndex(
-              (item) => item.id === parseInt(action.payload.id)
-            )
-          );
-      const updatedProject = currentState.projects
-        ? {
-            ...action.payload,
-            projects: {...currentState.projects[indexProject]},
-          }
-        : {
-            ...action.payload,
-            projects: {...currentState[indexProject]},
-          };
-
-      const from = currentState.projects
-        ? currentState.projects.slice(0, indexProject)
-        : currentState.slice(0, indexProject);
-      const to = currentState.projects
-        ? currentState.projects.slice(indexProject + 1)
-        : currentState.slice(indexProject + 1);
-      return [...from, updatedProject, ...to];
+      const id = action.payload.id;
+      state.projects[id] = action.payload;
     },
   },
 });
