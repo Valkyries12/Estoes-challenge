@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const projectsSlice = createSlice({
   name: "projects",
-  initialState: {
-    projects: [
+  initialState: [
+    
       {
         id: 1,
         projectName: "Landing page",
@@ -32,18 +32,19 @@ export const projectsSlice = createSlice({
         createdAt: "09/09/2020 10:30am"
       },
       
+    
     ],
-  },
   reducers: {
     deleteProject (state, action) {
-       return state.projects.filter((item) => item.id !== action.payload);
+      return state.filter((item) => item.id !== action.payload);
+      // state.projects = filteredProjects;
     },
     addProject (state, action) {
-      state.projects.push(action.payload);
+      state.push(action.payload);
     },
     editProject: (state, action) => {
       const id = action.payload.id;
-      state.projects[id -1] = action.payload;
+      state[id -1] = action.payload;
     },
   },
 });

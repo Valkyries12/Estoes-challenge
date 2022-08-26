@@ -87,10 +87,10 @@ const AgregarForm = () => {
               editProject({
                 id: parseInt(id),
                 projectName: values.projectName,
-                description: values.description,
                 projectManager: values.projectManager,
                 assignedTo: values.assignedTo,
                 status: values.status,
+                description: values.description,
                 createdAt: moment(date).format(format)
               })
             );
@@ -99,10 +99,10 @@ const AgregarForm = () => {
               addProject({
                 id: cantidadProyectos + 1,
                 projectName: values.projectName,
-                description: values.description,
                 projectManager: values.projectManager,
                 assignedTo: values.assignedTo,
                 status: values.status,
+                description: values.description,
                 createdAt: moment(date).format(format)
               })
             );
